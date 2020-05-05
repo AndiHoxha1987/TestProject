@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TestProject</string>
+    <string name="item_1_name">Test 1</string>
+    <string name="item_1_description">Test D1</string>
+    <string name="item_2_name">Test 2</string>
+    <string name="item_2_description">Test D2</string>
+    <string name="loading_msg">Toast Ready</string>
+    <string name="intent_email_subject">Hello Test</string>
+    <string name="send_email">Send Email</string>
+    <string name="click_button">Click Button</string>
+    <string name="button_test">100</string>
+    <string name="age">age</string>
+</resources>
