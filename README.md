@@ -21,4 +21,4 @@ Covered tests are:
 - Test onBackPressed(), etc.
 
 
-The project is helpful for daily developing routines, where tests are common.
+The project is helpful for daily developing routines, where ui tests with Espresso are very important and necessary.
