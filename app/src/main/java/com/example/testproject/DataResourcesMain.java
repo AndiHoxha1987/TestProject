@@ -6,17 +6,19 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.testproject.IdlingResouce.SimpleIdlingResource;
+import com.example.testproject.R;
 import com.example.testproject.model.Item;
 import java.util.ArrayList;
 
-public class DataResources {
-    private static final int DELAY_MILLIS = 3000;
+public class DataResourcesMain {
+    private static final int DELAY_MILLIS = 1000;
 
-    final static ArrayList<Item> mItem = new ArrayList<>();
+    private final static ArrayList<Item> mItem = new ArrayList<>();
 
     interface DelayerCallback{
         void onDone(ArrayList<Item> items);
     }
+
 
     /**
      * This method is meant to simulate downloading a large file which has a loading time
@@ -40,18 +42,19 @@ public class DataResources {
             idlingResource.setIdleState(false);
         }
 
+        if(mItem.size()==0){
+            // Display a toast to let the user know the images are downloading
+            String text = context.getString(R.string.loading_msg);
+            int duration = Toast.LENGTH_LONG;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
 
-        // Display a toast to let the user know the images are downloading
-        String text = context.getString(R.string.loading_msg);
-        int duration = Toast.LENGTH_LONG;
-        Toast toast = Toast.makeText(context, text, duration);
-        toast.show();
+            int itemOneAge = 30;
+            int itemTwoAge = 33;
 
-        int itemOneAge = 30;
-        int itemTwoAge = 33;
-
-        mItem.add(new Item(context.getString(R.string.item_1_name),context.getString(R.string.item_1_description),itemOneAge));
-        mItem.add(new Item(context.getString(R.string.item_2_name),context.getString(R.string.item_2_description),itemTwoAge));
+            mItem.add(new Item(context.getString(R.string.item_1_name),context.getString(R.string.item_1_description),itemOneAge));
+            mItem.add(new Item(context.getString(R.string.item_2_name),context.getString(R.string.item_2_description),itemTwoAge));
+        }
 
         /**
          * {@link postDelayed} allows the {@link Runnable} to be run after the specified amount of
@@ -74,4 +77,5 @@ public class DataResources {
             }
         }, DELAY_MILLIS);
     }
+
 }

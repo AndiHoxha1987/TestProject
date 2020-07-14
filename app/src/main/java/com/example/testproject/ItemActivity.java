@@ -1,15 +1,29 @@
 package com.example.testproject;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class ItemActivity extends AppCompatActivity {
+
+    private ImageView imageView,cameraView;
+    private int galleryRequestCode = 438;
+    private int REQUEST_IMAGE_CAPTURE = 1234;
+
+    @VisibleForTesting
+    protected static String KEY_IMAGE_DATA = "data";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +50,14 @@ public class ItemActivity extends AppCompatActivity {
                 testTextView.setText(R.string.button_test);
             }
         });
+        cameraView = findViewById(R.id.camera_view);
+        imageView = findViewById(R.id.image_view);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickPhoto();
+            }
+        });
     }
 
     public void sendEmail(View view) {
@@ -51,6 +73,41 @@ public class ItemActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
 
+        }
+    }
+
+    public void takePhoto(View view) {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
+        }
+    }
+
+    private void pickPhoto(){
+        Intent intent = new Intent();
+        intent.setAction(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        startActivityForResult(intent, galleryRequestCode);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if (requestCode == galleryRequestCode && data != null && data.getData() != null) {
+                Uri fileUri = data.getData();
+                Glide.with(this)
+                        .load(fileUri)
+                        .into(imageView);
+            }else if (requestCode == REQUEST_IMAGE_CAPTURE) {
+                assert data != null;
+                Bundle extras = data.getExtras();
+                if (extras == null || !extras.containsKey(KEY_IMAGE_DATA)) {
+                    return;
+                }
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                imageView.setImageBitmap(imageBitmap);
+            }
         }
     }
 }

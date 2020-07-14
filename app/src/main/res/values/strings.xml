@@ -10,4 +10,25 @@
     <string name="click_button">Click Button</string>
     <string name="button_test">100</string>
     <string name="age">age</string>
+    <string name="name">name</string>
+    <string name="description">description</string>
+    <string name="take_a_photo">Take a Photo</string>
+    <string name="text_launch_dialog">launch dialog</string>
+    <string name="text_title_of_dialog">Title of Dialog</string>
+    <string name="text_some_information">This dialog is displaying some information.</string>
+    <string name="text_ok">OK</string>
+    <string name="text_ok_toast">OK Toast</string>
+    <string name="cancel">Cancel</string>
+    <string name="cancel_toast">Cancel Toast</string>
+    <string name="text_capture_input">Enter your name</string>
+    <string name="text_enter_name">Enter your name</string>
+    <string name="element_text">Element</string>
+    <string name="item_element_text">This is element #</string>
+    <string name="middle">This is the middle!</string>
+    <string name="hello_world">Hello Espresso!</string>
+    <string name="change_text">Change text taking some time</string>
+    <string name="type_something">type something…</string>
+    <string name="waiting_msg">Waiting for message…</string>
+    <string name="recycle_view_activity">RecycleViewActivity</string>
+    <string name="text">text</string>
 </resources>
